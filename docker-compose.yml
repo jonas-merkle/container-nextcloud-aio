@@ -63,20 +63,6 @@ services:
       - "traefik.http.middlewares.nc-aio-secure-headers.headers.referrerpolicy=same-origin"
       - "traefik.http.middlewares.nc-aio-secure-headers.headers.customrequestheaders.X-Robots-Tag=none"
       - "traefik.http.middlewares.nc-aio-middleware-chain.chain.middlewares=nc-aio-secure-headers"
-      # http admin endpoint
-      - "traefik.http.routers.nc-aio-admin-web.entrypoints=web"
-      - "traefik.http.routers.nc-aio-admin-web.rule=Host(`admin.${NEXTCLOUD_AIO_CONT_URL}`)"
-      - "traefik.http.routers.nc-aio-admin-web.middlewares=nc-aio-admin-websecure-redir"
-      # https admin endpoint
-      - "traefik.http.routers.nc-aio-admin-web-secure.entrypoints=websecure"
-      - "traefik.http.routers.nc-aio-admin-web-secure.rule=Host(`admin.${NEXTCLOUD_AIO_CONT_URL}`)"
-      - "traefik.http.routers.nc-aio-admin-web-secure.tls=true"
-      - "traefik.http.routers.nc-aio-admin-web-secure.tls.certresolver=lets-encrypt"
-      - "traefik.http.routers.nc-aio-admin-web-secure.service=nc-aio-admin-service"
-      # middlewares admin
-      - "traefik.http.middlewares.nc-aio-admin-websecure-redir.redirectscheme.scheme=https"
-      # services admin
-      - "traefik.http.services.nc-aio-admin-service.loadbalancer.server.port=8080"
 
 
 # networks to use
