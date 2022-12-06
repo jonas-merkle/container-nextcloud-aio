@@ -13,7 +13,7 @@ docker compose container setup for [nextcloud-aio](https://github.com/nextcloud/
 1. link nextcloud-aio.yml traefik config to traefik instance
 
     ```bash
-    ln ...
+    ln -s ./config/traefik/nextcloud-aio.yml <traefik-container-root-dir>/config/dynamic-config/nextcloud-aio.yml
     ```
 
 2. add environment variables
