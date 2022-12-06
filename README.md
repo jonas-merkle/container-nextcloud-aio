@@ -37,9 +37,9 @@ docker compose container setup for [nextcloud-aio](https://github.com/nextcloud/
 
     b) add the nextcloud-aio-domaincheck container to the trafik-net
 
-        ```bash
-        docker network connect traefik-net nextcloud-aio-domaincheck
-        ```
+    ```bash
+    docker network connect traefik-net nextcloud-aio-domaincheck
+    ```
 
     c) modify `nextcloud-aio.yml`
         - add a `#` at the beginning of the following line: `- url: "http://nextcloud-aio-apache:11000"`
@@ -57,9 +57,9 @@ docker compose container setup for [nextcloud-aio](https://github.com/nextcloud/
 
     g) add the nextcloud-aio-apache container to the trafik-net
 
-        ```bash
-        docker network connect traefik-net nextcloud-aio-apache
-        ```
+    ```bash
+    docker network connect traefik-net nextcloud-aio-apache
+    ```
 
 5. stop container
 
