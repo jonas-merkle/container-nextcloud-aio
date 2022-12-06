@@ -1,0 +1,9 @@
+http:
+  services:
+
+    nc-aio-service:
+      loadBalancer:
+         passHostHeader: true
+         servers:
+           - url: "http://nextcloud-aio-apache:11000"
+           #- url: "http://nextcloud-aio-domaincheck:11000"
