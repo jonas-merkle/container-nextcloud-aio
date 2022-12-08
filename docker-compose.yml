@@ -13,7 +13,7 @@ services:
 
   # nextcloud aio service
   nextcloud:
-    image: nextcloud/all-in-one:latest-arm64 # Must be changed to 'nextcloud/all-in-one:latest-arm64' when used with an arm64 CPU
+    image: nextcloud/all-in-one:latest # Must be changed to 'nextcloud/all-in-one:latest-arm64' when used with an arm64 CPU
     restart: unless-stopped
     container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed
     volumes:
@@ -59,7 +59,6 @@ services:
       # middlewares
       - "traefik.http.middlewares.nc-aio-websecure-redir.redirectscheme.scheme=https"
       - "traefik.http.middlewares.nc-aio-secure-headers.headers.hostsproxyheaders=X-Forwarded-Host"
-      - "traefik.http.middlewares.nc-aio-secure-headers.headers.sslredirect=true"
       - "traefik.http.middlewares.nc-aio-secure-headers.headers.referrerpolicy=same-origin"
       - "traefik.http.middlewares.nc-aio-secure-headers.headers.customrequestheaders.X-Robots-Tag=none"
       - "traefik.http.middlewares.nc-aio-middleware-chain.chain.middlewares=nc-aio-secure-headers"
