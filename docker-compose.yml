@@ -45,24 +45,13 @@ services:
       # enable traefik
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
-      # http endpoint
-      - "traefik.http.routers.nc-aio-web.entrypoints=web"
-      - "traefik.http.routers.nc-aio-web.rule=Host(`${NEXTCLOUD_AIO_CONT_URL}`)"
-      - "traefik.http.routers.nc-aio-web.middlewares=nc-aio-websecure-redir"
       # https endpoint
       - "traefik.http.routers.nc-aio-web-secure.entrypoints=websecure"
       - "traefik.http.routers.nc-aio-web-secure.rule=Host(`${NEXTCLOUD_AIO_CONT_URL}`)"
       - "traefik.http.routers.nc-aio-web-secure.tls=true"
       - "traefik.http.routers.nc-aio-web-secure.tls.certresolver=lets-encrypt"
-      - "traefik.http.routers.nc-aio-web-secure.middlewares=nc-aio-middleware-chain"
+      - "traefik.http.routers.nc-aio-web-secure.middlewares=nc-aio-sec-header@file"
       - "traefik.http.routers.nc-aio-web-secure.service=nc-aio-service@file"
-      # middlewares
-      - "traefik.http.middlewares.nc-aio-websecure-redir.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.nc-aio-secure-headers.headers.hostsproxyheaders=X-Forwarded-Host"
-      - "traefik.http.middlewares.nc-aio-secure-headers.headers.referrerpolicy=same-origin"
-      - "traefik.http.middlewares.nc-aio-secure-headers.headers.customrequestheaders.X-Robots-Tag=none"
-      - "traefik.http.middlewares.nc-aio-middleware-chain.chain.middlewares=nc-aio-secure-headers"
-
 
 # networks to use
 networks:

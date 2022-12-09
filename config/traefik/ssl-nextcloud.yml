@@ -1,0 +1,10 @@
+http:
+
+  middlewares:
+
+    nc-aio-sec-header:
+      headers:
+        hostsProxyHeaders: "X-Forwarded-Host"
+        referrerPolicy: "same-origin"
+        customRequestHeaders:
+          X-Robots-Tag: "none"
