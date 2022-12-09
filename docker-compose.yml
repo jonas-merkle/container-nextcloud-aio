@@ -42,6 +42,8 @@ services:
       # - NEXTCLOUD_ADDITIONAL_PHP_EXTENSIONS=imagick # This allows to add additional php extensions to the Nextcloud container permanently. Default is imagick but can be overwritten by modifying this value. See https://github.com/nextcloud/all-in-one#how-to-add-php-extensions-permanently-to-the-nextcloud-container
       # - TALK_PORT=3478 # This allows to adjust the port that the talk container is using.
     labels:
+      # enbale watchtower updates
+      - "com.centurylinklabs.watchtower.enable=true"
       # enable traefik
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-net"
