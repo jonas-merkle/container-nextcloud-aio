@@ -7,3 +7,7 @@ http:
          servers:
            - url: "http://nextcloud-aio-apache:11000"
            #- url: "http://nextcloud-aio-domaincheck:11000"
+
+  serversTransports:
+    ncSslSkipVerifyTransport:
+      insecureSkipVerify: true

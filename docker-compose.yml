@@ -21,7 +21,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # May be changed on macOS, Windows or docker rootless. See the applicable documentation. If adjusting, don't forget to also set 'DOCKER_SOCKET_PATH'!
     ports:
       #- 80:80 # Can be removed when running behind a reverse proxy. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
-      - 8080:8080
+      #- 8080:8080
       #- 8443:8443 # Can be removed when running behind a reverse proxy. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
     networks:
       - traefik-net
@@ -54,6 +54,24 @@ services:
       - "traefik.http.routers.nc-aio-web-secure.tls.certresolver=lets-encrypt"
       - "traefik.http.routers.nc-aio-web-secure.middlewares=nc-aio-sec-header@file"
       - "traefik.http.routers.nc-aio-web-secure.service=nc-aio-service@file"
+      # https endpoint admin
+      - "traefik.http.routers.nc-aio-web-secure-admin.entrypoints=websecure"
+      - "traefik.http.routers.nc-aio-web-secure-admin.rule=Host(`admin.${NEXTCLOUD_AIO_CONT_URL}`)"
+      - "traefik.http.routers.nc-aio-web-secure-admin.tls=true"
+      - "traefik.http.routers.nc-aio-web-secure-admin.tls.certresolver=lets-encrypt"
+      - "traefik.http.routers.nc-aio-web-secure-admin.middlewares=nc-aio-sec-header@file"
+      - "traefik.http.routers.nc-aio-web-secure-admin.service=nc-aio-web-secure-admin-service"
+      # https endpoint alternative url
+      #- "traefik.http.routers.nc-aio-web-secure-alt.entrypoints=websecure"
+      #- "traefik.http.routers.nc-aio-web-secure-alt.rule=Host(`${NEXTCLOUD_AIO_CONT_URL_ALT}`)"
+      #- "traefik.http.routers.nc-aio-web-secure-alt.tls=true"
+      #- "traefik.http.routers.nc-aio-web-secure-alt.tls.certresolver=lets-encrypt"
+      #- "traefik.http.routers.nc-aio-web-secure-alt.middlewares=nc-aio-sec-header@file"
+      #- "traefik.http.routers.nc-aio-web-secure-alt.service=nc-aio-service@file"
+      # services
+      - "traefik.http.services.nc-aio-web-secure-admin-service.loadbalancer.server.port=8080"
+      - "traefik.http.services.nc-aio-web-secure-admin-service.loadbalancer.server.scheme=https"
+      - "traefik.http.services.nc-aio-web-secure-admin-service.loadbalancer.serversTransport=ncSslSkipVerifyTransport@file"
 
 # networks to use
 networks:
