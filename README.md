@@ -1,6 +1,6 @@
 # container-nextcloud-aio
 
-A Docker Compose container setup for [nextcloud-aio](https://github.com/nextcloud/all-in-one).
+A Docker Compose container setup for [Nextcloud AIO](https://github.com/nextcloud/all-in-one).
 
 ## Table of contents
 
