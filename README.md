@@ -1,68 +1,75 @@
 # container-nextcloud-aio
 
-docker compose container setup for [nextcloud-aio](https://github.com/nextcloud/all-in-one).
+A Docker Compose container setup for [nextcloud-aio](https://github.com/nextcloud/all-in-one).
 
-## setup
+## Table of contents
 
-0. requirements
+- [container-nextcloud-aio](#container-nextcloud-aio)
+  - [Table of contents](#table-of-contents)
+  - [Setup](#setup)
+  - [First startup](#first-startup)
 
-   - docker
-   - docker-compose
-   - a running [traefik instance](https://github.com/jonas-merkle/container-traefik)
+## Setup
 
-1. link nextcloud-aio.yml traefik config to traefik instance
+0. Requirements
+
+   - Docker
+   - Docker Compose
+   - A running [Traefik instance](https://github.com/jonas-merkle/container-traefik)
+
+1. Link nextcloud-aio.yml Traefik config to Traefik instance
 
     ```bash
     ln ./config/traefik/nextcloud-aio.yml <traefik-container-root-dir>/config/dynamic-config/nextcloud-aio.yml
     ```
 
-2. add environment variables
+2. Add environment variables
+
+    Add the missing information for the environment variables:
 
     ```bash
     nano .env
     ```
 
-    add the missing information for the environment variables
-
-3. start container
+3. Start container
 
     ```bash
     docker-compose up -d
     ````
 
-4. first setup
+4. Stop container
 
-    a) start domain verification
-        open `https://admin.<nextcloud-url>` in browser and start
+    ```bash
+    docker-compose down
+    ```
 
-    b) add the nextcloud-aio-domaincheck container to the trafik-net
+## First startup
+
+1. Start domain verification:
+   Open `https://admin.<nextcloud-url>` in browser and start the process.
+
+2. Add the nextcloud-aio-domaincheck container to the `trafik-net`:
 
     ```bash
     docker network connect traefik-net nextcloud-aio-domaincheck
     ```
 
-    c) modify `nextcloud-aio.yml`
-        - add a `#` at the beginning of the following line: `- url: "http://nextcloud-aio-apache:11000"`
-        - remove the '#' at the beginning of the next line.
-        - save the file.
+3. Modify the `nextcloud-aio.yml` file:
+   - Add a `#` at the beginning of the following line: `- url: "http://nextcloud-aio-apache:11000"`
+   - Remove the '#' at the beginning of the next line.
+   - Save the file.
 
-    d) run domain verification
-        - enter the nextcloud-url in the form
-        - click the check button
+4. Run domain verification
+   - Enter the nextcloud-url in the form.
+   - Click the check button.
 
-    e) modify `nextcloud-aio.yml`
-        - undo the changes from step b).
+5. Modify the `nextcloud-aio.yml` file again:
+   - undo the changes from step 3.
 
-    f) proceed with the setup
+6. Proceed with the setup.
 
-    g) add the nextcloud-aio-apache container to the trafik-net
+7. Add the nextcloud-aio-apache container to the `trafik-net`.
 
     ```bash
     docker network connect traefik-net nextcloud-aio-apache
-    ```
-
-5. stop container
-
-    ```bash
-    docker-compose down
     ```
