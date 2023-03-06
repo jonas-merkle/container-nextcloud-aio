@@ -30,6 +30,12 @@ A Docker Compose container setup for [Nextcloud AIO](https://github.com/nextclou
     ```bash
     nano .env
     ```
+    
+    Mark the `.env` file so it's not tracked by git:
+
+    ```bash
+    git update-index --assume-unchanged .env
+    ```
 
 3. Start container
 
