@@ -56,7 +56,7 @@ services:
       - "traefik.http.routers.nc-aio-web-secure.service=nc-aio-service@file"
       # https endpoint admin
       - "traefik.http.routers.nc-aio-web-secure-admin.entrypoints=websecure"
-      - "traefik.http.routers.nc-aio-web-secure-admin.rule=Host(`admin-${NEXTCLOUD_AIO_CONT_URL}`)"
+      - "traefik.http.routers.nc-aio-web-secure-admin.rule=Host(`admin.${NEXTCLOUD_AIO_CONT_URL}`)"
       - "traefik.http.routers.nc-aio-web-secure-admin.tls=true"
       - "traefik.http.routers.nc-aio-web-secure-admin.tls.certresolver=lets-encrypt"
       - "traefik.http.routers.nc-aio-web-secure-admin.middlewares=nc-aio-sec-header@file"
