@@ -17,10 +17,11 @@ A Docker Compose container setup for [Nextcloud AIO](https://github.com/nextclou
    - Docker Compose
    - A running [Traefik instance](https://github.com/jonas-merkle/container-traefik)
 
-1. Link nextcloud-aio.yml Traefik config to Traefik instance
+1. Link `nextcloud-aio.yml`and `ssl-nextcloud.yml` Traefik config to Traefik instance
 
     ```bash
     ln ./config/traefik/nextcloud-aio.yml <traefik-container-root-dir>/config/dynamic-config/nextcloud-aio.yml
+    ln ./config/traefik/ssl-nextcloud.yml <traefik-container-root-dir>/config/dynamic-config/ssl-nextcloud.yml
     ```
 
 2. Add environment variables
